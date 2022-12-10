@@ -1,4 +1,4 @@
-# tc-rust
+# tokyocabinet-rust
 使用[rust-bindgen](https://github.com/rust-lang/rust-bindgen)
 封装系统环境中的tokyobinetdb。
 因此需要在系统中安装c实现的tokyocabinet。
