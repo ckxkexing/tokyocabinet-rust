@@ -35,8 +35,10 @@ impl TCH {
             Some(TCH(res))
         }
     }
-    pub fn tchdbopen(&self, path:CString , mode:c_int) -> bool {
-        unsafe{tchdbopen(self.0, path.as_ptr(), mode)}
+    pub fn tchdbopen(&self, path:CString , mode:c_int) -> Option<bool> {
+        let res= unsafe{tchdbopen(self.0, path.as_ptr(), mode)};
+        if res { Some(res) }
+        else { None }
     }
     pub fn tchdbput2(&self, key:CString, value:CString) -> bool{
         unsafe {tchdbput2(self.0, key.as_ptr(), value.as_ptr()) }
@@ -147,7 +149,7 @@ mod tests {
     fn test_TCH(){
         let db = TCH::tchdbnew().unwrap();
         let path = str2cstr("./casket2.tch");
-        db.tchdbopen(path, (HDBOWRITER | HDBOCREAT) as c_int);
+        db.tchdbopen(path, (HDBOWRITER | HDBOCREAT) as c_int).unwrap();
         db.tchdbput2(str2cstr("foo"), str2cstr("value"));
         let v = db.tchdbget2(str2cstr("foo"));
         assert_eq!(v, String::from("value"));
