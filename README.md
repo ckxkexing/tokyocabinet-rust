@@ -4,10 +4,12 @@
 因此需要在系统中安装c实现的tokyocabinet。
 
 test代码参考[tokyocabinet-sys](https://github.com/ehiggs/tokyocabinet-sys)
+### Todo
+How to use c function in Rust safe mode?
 
 ### warning!
 1. libtokyocabinet use `u128`, make rust compiler warning。
-2. call c function seems all unsafe.
+2. call C function seems all unsafe.
 
 ### build && test
 build
